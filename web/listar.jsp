@@ -4,7 +4,8 @@
     Author     : Paulo
 --%>
 
-<%@ page import="java.util.*, model.Agendamento" %>
+<%@page import="br.com.prsoftware.model.Agendamento"%>
+<%@ page import="java.util.*, br.com.prsoftware.model.Agendamento" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%
     List<Agendamento> lista = (List<Agendamento>) request.getAttribute("agendamentos");
