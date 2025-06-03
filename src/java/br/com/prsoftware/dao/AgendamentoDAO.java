@@ -6,6 +6,7 @@ package br.com.prsoftware.dao;
 
 import br.com.prsoftware.env.EnvLoader;
 import br.com.prsoftware.model.Agendamento;
+import com.mysql.cj.Messages;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,17 +23,19 @@ public class AgendamentoDAO {
     }
     
     public void inserir(Agendamento ag) throws SQLException{
-        String sql = "INSERT INTO agendamentos (veiculo,data_retirada,data_devolucao,status)  VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO agendamentos (motorista,veiculo,placa,data_retirada,data_devolucao,status)  VALUES (?, ?, ?, ?, ?, ?)";
         try(Connection conn = getConnection();PreparedStatement ps = conn.prepareStatement(sql)){
-            ps.setString(1, ag.getVeiculo());
-            ps.setTimestamp(2, new Timestamp(ag.getDataRetirada().getTime()));
+            ps.setString(1, ag.getMotorista());
+            ps.setString(2, ag.getVeiculo());
+            ps.setString(3, ag.getPlaca());
+            ps.setTimestamp(4, new Timestamp(ag.getDataRetirada().getTime()));
             if(ag.getDataDevolucao() !=null){
-                ps.setTimestamp(3, new Timestamp(ag.getDataRetirada().getTime()));
+                ps.setTimestamp(4, new Timestamp(ag.getDataRetirada().getTime()));
             }else{
-                ps.setNull(3, Types.TIMESTAMP);
+                ps.setNull(5, Types.TIMESTAMP);
             }
             
-            ps.setString(4, ag.getStatus());
+            ps.setString(6, ag.getStatus());
             ps.executeUpdate();
         }
             
@@ -45,6 +48,8 @@ public class AgendamentoDAO {
             while(rs.next()){
                 Agendamento ag = new Agendamento();
                 ag.setId(rs.getInt("id"));
+                ag.setMotorista(rs.getString("motorista"));
+                ag.setPlaca(rs.getString("placa"));
                 ag.setVeiculo(rs.getString("veiculo"));
                 ag.setDataRetirada(rs.getTimestamp("data_retirada"));
                 ag.setDataDevolucao(rs.getTimestamp("data_devolucao"));

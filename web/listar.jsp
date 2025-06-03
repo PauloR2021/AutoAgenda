@@ -18,7 +18,9 @@
     <% for (Agendamento ag : lista) { %>
     <tr>
         <td><%= ag.getId() %></td>
+        <td><%=ag.getMotorista() %></td>
         <td><%= ag.getVeiculo() %></td>
+        <td><%= ag.getPlaca() %></td>
         <td><%= sdf.format(ag.getDataRetirada()) %></td>
         <td><%= (ag.getDataDevolucao() != null ? sdf.format(ag.getDataDevolucao()) : "-") %></td>
         <td><%= ag.getStatus() %></td>

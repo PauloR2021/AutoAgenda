@@ -42,12 +42,16 @@ public class AgendamentoServlet extends HttpServlet {
         
         try{
             if("retirar".equals(acao)){
+                String motorista = request.getParameter("motorista");
                 String veiculo = request.getParameter("veiculo");
+                String placa = request.getParameter("placa");
                 Date dataRetirada = sdf.parse(request.getParameter("dataRetirada"));
                 String dataDevStr = request.getParameter("dataDevolucao");
                 
                 Agendamento ag = new Agendamento();
+                ag.setMotorista(motorista);
                 ag.setVeiculo(veiculo);
+                ag.setPlaca(placa);
                 ag.setDataRetirada(dataRetirada);
                 ag.setStatus("RETIRADO");
                 
