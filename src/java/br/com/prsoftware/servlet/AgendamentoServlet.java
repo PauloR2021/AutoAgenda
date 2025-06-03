@@ -13,13 +13,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 
 /**
@@ -31,12 +28,14 @@ public class AgendamentoServlet extends HttpServlet {
     
     private AgendamentoDAO dao = new AgendamentoDAO();
     
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws  ServletException, IOException{
         List<Agendamento> lista = dao.listar();
         request.setAttribute("agendamentos", lista);
         request.getRequestDispatcher("listar.jsp").forward(request, response);
     }
     
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws  ServletException, IOException{
         String acao = request.getParameter("acao");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");

@@ -13,7 +13,9 @@ import java.util.Date;
  */
 public class Agendamento {
     private int id;
+    private String motorista;
     private String veiculo;
+    private String placa;
     private Date dataRetirada;
     private Date dataDevolucao;
     private String status;
@@ -25,6 +27,25 @@ public class Agendamento {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getMotorista() {
+        return motorista;
+    }
+
+    public void setMotorista(String motorista) {
+        this.motorista = motorista;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+    
+    
+    
 
     public String getVeiculo() {
         return veiculo;

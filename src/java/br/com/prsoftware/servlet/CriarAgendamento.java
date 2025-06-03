@@ -15,9 +15,17 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Paulo
  */
-@WebServlet("agendar")
+@WebServlet("/agendar")
 public class CriarAgendamento extends HttpServlet {
-    public class AgendarVeiculoServlet extends HttpServlet {
+    
+    // GET: Acessado diretamente pelo navegador
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Redireciona para a página de agendamento
+        request.getRequestDispatcher("agendar.jsp").forward(request, response);
+    }
+ 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
@@ -31,7 +39,7 @@ public class CriarAgendamento extends HttpServlet {
 
         response.getWriter().println("Veículo agendado com sucesso!");
     }
-    }
+   
 
     
 }
