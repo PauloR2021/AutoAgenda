@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html lang="pt-BR">
+    <head>
+        <title>Auto Agenda</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/style_agendar.css">
+    </head>
+    <body>
+        <header class="cabecalho">
+            <div class="nav-buttons">
+                <a href="index.html">Criar Agendamento</a>
+                <a href="agendamento">Listar Agendamentos</a>  
+            </div>
+        </header>
+        
+        <h1>Criar Agendamentos Novo</h1>
+        <form action="agendar" method="post"  >
+            <label for="motorista">Nome do Motorista:</label>
+            <input type="text" id="motorista" name="motorista" required  autocomplete="off">
+            
+            <label for="veiculo">Veículo:</label>
+            <input type="text" id="veiculo" name="veiculo" required autocomplete="off">
+            
+            <label for="placa">Placa do Veículo:</label>
+            <input type="text" id="placa" name="placa" required autocomplete="off">
+            
+            <label for="data-retirada">Data Retirada:</label>
+            <input type="datetime-local" id="data-retirada" name="data-retirada" required autocomplete="off">
+            
+            <label for="data-devolucao">Data Devolução:</label>
+            <input type="datetime-local" id="data-devolucao" name="data-devolucao" required autocomplete="off">
+            
+            <label for="status">Status:</label>
+            <select name="status" id="status" required>
+                <option value="pendente">Pendente</option>
+                <option value="em-uso">Em Uso</option>
+                <option value="concluido">Concluido</option>   
+            </select>
+            
+            <label for="observacao">Observação:</label>
+            <textarea id="observacoes" name="observacoes" rows="6" cols="50"></textarea>
+            
+            <button type="submit" value="Agendar">
+        </form>
+    </body>
+</html>

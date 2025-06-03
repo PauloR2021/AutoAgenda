@@ -19,12 +19,12 @@ import jakarta.servlet.http.HttpServletResponse;
 public class CriarAgendamento extends HttpServlet {
     
     // GET: Acessado diretamente pelo navegador
-    @Override
+    /*@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Redireciona para a página de agendamento
         request.getRequestDispatcher("agendar.jsp").forward(request, response);
-    }
+    }*/
  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
