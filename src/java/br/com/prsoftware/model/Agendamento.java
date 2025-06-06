@@ -19,6 +19,7 @@ public class Agendamento {
     private Date dataRetirada;
     private Date dataDevolucao;
     private String status;
+    private String observacao;
 
     public int getId() {
         return id;
@@ -78,6 +79,15 @@ public class Agendamento {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+    
     
     
     

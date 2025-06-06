@@ -11,7 +11,7 @@
   <header class="cabecalho">
     <div class="nav-buttons">
         <a href="index.html">Criar Agendamento</a>
-        <a href="listar.jsp">Listar Agendamentos</a>
+        <a href="agendamento">Listar Agendamentos</a>
     </div>
   </header>
     
@@ -36,6 +36,11 @@
 
           <label for="observacoes">Observação:</label>
           <textarea id="observacoes" name="observacoes" rows="4"></textarea>
+          
+           <label for="status">Status:</label>
+           <select name="status" id="status" required>
+                <option value="agendado">Agendado</option>
+           </select>
 
           <button type="submit">Agendar</button>
         </form>

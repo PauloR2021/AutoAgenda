@@ -54,6 +54,7 @@ public class AgendamentoDAO {
                 ag.setDataRetirada(rs.getTimestamp("data_retirada"));
                 ag.setDataDevolucao(rs.getTimestamp("data_devolucao"));
                 ag.setStatus(rs.getString("status"));
+                ag.setObservacao(rs.getString("observacao"));
                 lista.add(ag);
             }
         }catch (SQLException e){

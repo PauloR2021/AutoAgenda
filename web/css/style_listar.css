@@ -1,0 +1,112 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 6 de jun. de 2025, 06:43:15
+    Author     : Paulo
+*/
+
+:root{
+    --cor-body: #f2f4f8;
+    --cor-cabecalho: #2c3e50;
+    --cor-nav-button-a: #ecf0f1;
+    --cor-nav-button-a-background:#34495e;
+    --cor-nav-button-a-background-hover: #1abc9c;
+    --cor-h1: #34495e;
+    --cor-label:#2c3e50;
+    --cor-input-border-color:#1abc9c;
+    --cor-button: #1abc9c;
+    --cor-button-hover:#16a085;
+    --cor-background-th: #007bff;
+    --cor-background-tr-even: #f2f2f2;
+    
+}
+
+
+/* Reset básico */
+
+body {
+  margin: 0;
+  height: 100vh;
+  background-color: var(--cor-body);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Cabeçalho fixo */
+.cabecalho {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--cor-cabecalho);
+  padding: 15px 0px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  z-index: 100;
+  margin-bottom: 10px;
+}
+
+.nav-buttons {
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+}
+
+.nav-buttons a {
+  color: var(--cor-nav-button-a);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 5px;
+  background-color: var(--cor-nav-button-a-background);
+  transition: background-color 0.3s ease;
+}
+
+.nav-buttons a:hover {
+  background-color: var(--cor-nav-button-a-background-hover);
+  color: #fff;
+}
+h1 {
+  font-size: 2.2rem;
+  color: var(--cor-h1);
+  margin-bottom: 10px;
+
+}
+
+/* Container centralizado */
+.container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 300px;
+}
+
+/* Editando a Tabela */
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+table th, table td{
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center; 
+}
+table th{
+    background-color: var(--cor-background-th);
+    color:white;
+}
+
+table tr:nth-child(even){
+    background-color: var(--cor-background-tr-even);
+}
+
