@@ -20,7 +20,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     --cor-button-hover:#16a085;
     --cor-background-th: #007bff;
     --cor-background-tr-even: #f2f2f2;
-    
+    --cor-button-retirado: #28a745;
+    --cor-button-retirado-hover:#218838;
+    --cor-button-devolver: #0073e6;
+    --cor-button-devolver-hover: #3399ff;
+    --cor-button-cancelado: #dc3545;
+    --cor-button-cancelado-hover:#c82333;
 }
 
 
@@ -72,12 +77,6 @@ body {
   background-color: var(--cor-nav-button-a-background-hover);
   color: #fff;
 }
-h1 {
-  font-size: 2.2rem;
-  color: var(--cor-h1);
-  margin-bottom: 10px;
-
-}
 
 /* Container centralizado */
 .container {
@@ -87,6 +86,19 @@ h1 {
   align-items: center;
   justify-content: center;
   padding: 40px 300px;
+  max-width: 1200px;
+}
+h1 {
+  font-size: 2.2rem;
+  color: var(--cor-h1);
+  margin-bottom: 10px;
+
+}
+
+p{
+    text-align: center;
+    font-size: 1.1em;
+    color: #666;
 }
 
 /* Editando a Tabela */
@@ -98,7 +110,7 @@ table{
 }
 table th, table td{
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 12px 25px;
     text-align: center; 
 }
 table th{
@@ -108,5 +120,64 @@ table th{
 
 table tr:nth-child(even){
     background-color: var(--cor-background-tr-even);
+}
+
+/* Botões estilizados */
+button {
+    background-color: #0073e6;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    margin: 0 3px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+/*Botão Retirado - Cor Verde*/
+button.btn-retirado{
+    background-color: var(--cor-button-retirado);
+}
+button.btn-retirado:hover {
+    background-color: var(--cor-button-retirado-hover);
+}
+
+
+/*Botão Devolver - Cor Azul*/
+button.btn-devolvido{
+   background-color: var(--cor-button-devolver);
+}
+button.btn-devolvido:hover{
+    background-color: var(--cor-button-devolver-hover);
+}
+
+
+/*Botão Cancelado - Cor Vermelho*/
+button.btn-cancelado{
+   background-color: var(--cor-button-cancelado);
+}
+button.btn-cancelado:hover{
+    background-color: var(--cor-button-cancelado-hover);
+}
+
+/* Ajustando formulários inline */
+form {
+    display: inline;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    th, td {
+        padding: 10px 8px;
+        font-size: 0.85em;
+    }
+
+    header.cabecalho .nav-buttons a {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
 }
 

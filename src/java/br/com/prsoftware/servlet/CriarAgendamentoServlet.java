@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author Paulo
  */
 @WebServlet("/agendar")
-public class CriarAgendamento extends HttpServlet {
+public class CriarAgendamentoServlet extends HttpServlet {
     
     // GET: Acessado diretamente pelo navegador
     /*@Override

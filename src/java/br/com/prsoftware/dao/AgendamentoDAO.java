@@ -6,7 +6,7 @@ package br.com.prsoftware.dao;
 
 import br.com.prsoftware.env.EnvLoader;
 import br.com.prsoftware.model.Agendamento;
-import com.mysql.cj.Messages;
+import br.com.prsoftware.model.AgendamentoUpdate;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +61,22 @@ public class AgendamentoDAO {
             e.printStackTrace();
         }
         return lista;
+    }
+    
+    public void atuaizar(AgendamentoUpdate update){
+        
+        String sql = "UPDATE agendamentos SET status=? WHERE id=?";
+        
+        try(Connection conn = getConnection();PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setString(1, update.getStatus());
+            ps.setInt(2, update.getId());
+            
+            ps.executeUpdate();
+            
+        }catch (Exception e){
+           e.printStackTrace();
+        }
+        
     }
     
     public void devolver (int id, Date dataDevolucao)throws SQLException{

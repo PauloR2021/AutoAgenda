@@ -20,6 +20,7 @@
     <title>Consultar Produtos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style_listar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
@@ -39,12 +40,15 @@
                 <tr>
                     <th>ID</th>
                     <th>Nome Motorista</th>
-                    <th>Veiculo</th>
+                    <th>Veículo</th>
                     <th>Placa</th>
-                    <th>Data da Retirada</th>
-                    <th>Data do Retorno</th>
-                    <th>Observacao</th>
+                    <th>Data Retirada</th>
+                    <th>Data Retorno</th>
+                    <th>Observação</th>
                     <th>Status</th>
+                    <th>Retirado</th>
+                    <th>Devolver</th>
+                    <th>Cancelar</th>
                 </tr>
                 <% for (Agendamento p : lista) { %>
                     <tr>
@@ -56,10 +60,38 @@
                         <td><%= p.getDataDevolucao()%></td>
                         <td><%= p.getObservacao()%></td>
                         <td><%= p.getStatus()%></td>
+                        <td>
+                            <!-- Criando o Button para Mudar o Status para Retirado no banco -->
+                            <form action="retirado" method="get" style="display:inline;">
+                                <input type="hidden" name="id" value="<%=p.getId() %>">
+                                <button type="submit" class="btn-retirado" onclick="return confirm('Deseja realmente Retirar o Veículo?');">
+                                    <i class="fas fa-check-circle"></i> RETIRADO
+                                </button>   
+                            </form>
+                        </td>
                         
+                        <td>
+                            <!-- Criando o Button para Mudar o Status para Devolvido -->
+                            <form action="devolvido" method="get" style="display:inline;">
+                                <input type="hidden" name="id" value="<%=p.getId() %>">
+                                <button type="submit" class="btn-devolvido" onclick="return confirm('Deseja realmente devolver esse Veículo?')">
+                                    <i class="fas fa-check-circle"></i> DEVOLVER
+                                </button>   
+                            </form>
+                        </td>
+                        
+                        <td>
+                            <!-- Criando o Button para Cancelar o Agendamento do Veiculo -->
+                            <form action="CancelarServelt" method="get" style="display:inline;">
+                                <input type="hidden" name="id" value="<%=p.getId() %>">
+                                <button type="submit" class="btn-cancelado">
+                                  <i class="fas fa-times-circle"></i> CANCELAR
+                                </button>   
+                            </form>
+                         
+                        </td> 
                     </tr>
-                    <button type="submit">Alterar</button>
-                    <button type="submit">Deletar</button>
+                    
                 <% } %>
             </table>
         <% } %>
