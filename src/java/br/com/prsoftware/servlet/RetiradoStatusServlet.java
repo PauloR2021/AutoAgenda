@@ -29,9 +29,9 @@ public class RetiradoStatusServlet extends HttpServlet {
             
             AgendamentoUpdate agendamentoUpdate = new AgendamentoUpdate(id,status);
             
-            dao.atuaizar(agendamentoUpdate);
+            dao.atualizar(agendamentoUpdate);
             
-            response.sendRedirect("listar.jsp");
+            response.sendRedirect("agendamento");
             
         }catch (Exception e){
             e.printStackTrace();

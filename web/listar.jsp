@@ -72,7 +72,7 @@
                         
                         <td>
                             <!-- Criando o Button para Mudar o Status para Devolvido -->
-                            <form action="devolvido" method="get" style="display:inline;">
+                            <form action="devolver" method="post" style="display:inline;">
                                 <input type="hidden" name="id" value="<%=p.getId() %>">
                                 <button type="submit" class="btn-devolvido" onclick="return confirm('Deseja realmente devolver esse Veículo?')">
                                     <i class="fas fa-check-circle"></i> DEVOLVER
@@ -82,9 +82,9 @@
                         
                         <td>
                             <!-- Criando o Button para Cancelar o Agendamento do Veiculo -->
-                            <form action="CancelarServelt" method="get" style="display:inline;">
+                            <form action="excluir" method="post" style="display:inline;">
                                 <input type="hidden" name="id" value="<%=p.getId() %>">
-                                <button type="submit" class="btn-cancelado">
+                                <button type="submit" class="btn-cancelado" onclick="return confirm('Deseja realmente Cancelar esse Veículo?')">
                                   <i class="fas fa-times-circle"></i> CANCELAR
                                 </button>   
                             </form>

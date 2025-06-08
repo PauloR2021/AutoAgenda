@@ -13,9 +13,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -30,9 +33,15 @@ public class AgendamentoServlet extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws  ServletException, IOException{
-        List<Agendamento> lista = dao.listar();
-        request.setAttribute("agendamentos", lista);
-        request.getRequestDispatcher("listar.jsp").forward(request, response);
+        try {
+            List<Agendamento> lista = dao.listar();
+            request.setAttribute("agendamentos", lista);
+            request.getRequestDispatcher("listar.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(AgendamentoServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AgendamentoServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @Override
@@ -41,30 +50,30 @@ public class AgendamentoServlet extends HttpServlet {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
         
         try{
-            if("retirar".equals(acao)){
-                String motorista = request.getParameter("motorista");
-                String veiculo = request.getParameter("veiculo");
-                String placa = request.getParameter("placa");
-                Date dataRetirada = sdf.parse(request.getParameter("dataRetirada"));
-                String dataDevStr = request.getParameter("dataDevolucao");
-                
-                Agendamento ag = new Agendamento();
-                ag.setMotorista(motorista);
-                ag.setVeiculo(veiculo);
-                ag.setPlaca(placa);
-                ag.setDataRetirada(dataRetirada);
-                ag.setStatus("RETIRADO");
-                
-                if(dataDevStr != null && !dataDevStr.isEmpty()){
-                    ag.setDataDevolucao(sdf.parse(dataDevStr));
-                    ag.setStatus("DEVOLVIDO");                
-                }
-                
-                dao.inserir(ag);
-            }else if("DEVOLVER".equals(acao)){
-                int id = Integer.parseInt(request.getParameter("id"));
-                dao.devolver(id, (java.sql.Date) new Date());   
+            String motorista = request.getParameter("motorista");
+            String veiculo = request.getParameter("veiculo");
+            String placa = request.getParameter("placa");
+            String text = request.getParameter("data-retirada");
+            Date data = null;
+
+            if (text != null && !text.isEmpty()) {
+                sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm"); // ou seu formato
+                data = sdf.parse(text);
             }
+            String dataDevStr = request.getParameter("data-devolucao");
+            String observacao = request.getParameter("observacoes");
+
+            Agendamento ag = new Agendamento();
+            
+            ag.setMotorista(motorista);
+            ag.setVeiculo(veiculo);
+            ag.setPlaca(placa);
+            ag.setDataRetirada(data);
+            ag.setObservacao(observacao);
+            ag.setStatus("AGENDADO");
+            
+            dao.inserir(ag);
+            
             
             response.sendRedirect("agendamento");
         } catch (Exception e) {

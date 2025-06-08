@@ -6,6 +6,8 @@ package br.com.prsoftware.dao;
 
 import br.com.prsoftware.env.EnvLoader;
 import br.com.prsoftware.model.Agendamento;
+import br.com.prsoftware.model.AgendamentoDevolucao;
+import br.com.prsoftware.model.AgendamentoExcluir;
 import br.com.prsoftware.model.AgendamentoUpdate;
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,30 +20,27 @@ import java.util.List;
  * Criando os Métodos que vão ser utilizados para funções no Banco de Dados
  */
 public class AgendamentoDAO {
-    private Connection getConnection()throws SQLException{
+    
+    private Connection getConnection()throws SQLException, ClassNotFoundException{
+        Class.forName("com.mysql.cj.jdbc.Driver");
         return DriverManager.getConnection(EnvLoader.get("DB_URL"),EnvLoader.get("DB_USER"),EnvLoader.get("DB_PASSWORD"));
     }
     
-    public void inserir(Agendamento ag) throws SQLException{
-        String sql = "INSERT INTO agendamentos (motorista,veiculo,placa,data_retirada,data_devolucao,status)  VALUES (?, ?, ?, ?, ?, ?)";
-        try(Connection conn = getConnection();PreparedStatement ps = conn.prepareStatement(sql)){
+    public void inserir(Agendamento ag) throws Exception {
+        String sql = "INSERT INTO agendamentos (motorista, veiculo, placa, data_retirada, data_devolucao, observacao, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, ag.getMotorista());
             ps.setString(2, ag.getVeiculo());
             ps.setString(3, ag.getPlaca());
             ps.setTimestamp(4, new Timestamp(ag.getDataRetirada().getTime()));
-            if(ag.getDataDevolucao() !=null){
-                ps.setTimestamp(4, new Timestamp(ag.getDataRetirada().getTime()));
-            }else{
-                ps.setNull(5, Types.TIMESTAMP);
-            }
-            
-            ps.setString(6, ag.getStatus());
+            ps.setTimestamp(5, new Timestamp(ag.getDataRetirada().getTime())); // Pode ser null ou outra lógica
+            ps.setString(6, ag.getObservacao());
+            ps.setString(7, ag.getStatus());
             ps.executeUpdate();
         }
-            
     }
     
-    public List<Agendamento> listar(){
+    public List<Agendamento> listar() throws SQLException, ClassNotFoundException{
         List<Agendamento> lista = new ArrayList<>();
         String sql = "SELECT * FROM agendamentos";
         try(Connection conn = getConnection(); PreparedStatement ps= conn.prepareStatement(sql); ResultSet rs=ps.executeQuery()){
@@ -63,7 +62,7 @@ public class AgendamentoDAO {
         return lista;
     }
     
-    public void atuaizar(AgendamentoUpdate update){
+    public void atualizar(AgendamentoUpdate update){
         
         String sql = "UPDATE agendamentos SET status=? WHERE id=?";
         
@@ -79,12 +78,34 @@ public class AgendamentoDAO {
         
     }
     
-    public void devolver (int id, Date dataDevolucao)throws SQLException{
-        String sql = "UPDATE agendamento SET data_devolucao=?, status= 'DEVOLVIDO', where id=?";
-        try(Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)){
-            ps.setTimestamp(1,new Timestamp(dataDevolucao.getTime()));
-            ps.setInt(2, id);
-            ps.executeUpdate();
-        }
-    }
+    public void devolucao(AgendamentoDevolucao devolucao){
+
+       String sql = "UPDATE agendamentos SET data_devolucao=NOW(), status='DEVOLVIDO' WHERE id=?";
+
+       try(Connection conn = getConnection();PreparedStatement ps = conn.prepareStatement(sql)){
+           ps.setInt(1, devolucao.getId());
+
+           ps.executeUpdate();
+
+       }catch (Exception e){
+          e.printStackTrace();
+       }
+   }
+    
+    public void excluir(AgendamentoExcluir excluir){
+
+       String sql = "DELETE FROM agendamentos WHERE id = ?;";
+
+       try(Connection conn = getConnection();PreparedStatement ps = conn.prepareStatement(sql)){
+           ps.setInt(1, excluir.getId());
+
+           ps.executeUpdate();
+
+       }catch (Exception e){
+          e.printStackTrace();
+       }
+
+   }
+    
+   
 }
